@@ -2,706 +2,672 @@
 <html lang="fr">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mon CV</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mon CV | CVMaker</title>
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<style>
 
-        body {
-            font-family: Arial, sans-serif;
-            background: #f1f2f6;
-            color: #333;
-            padding: 30px 15px;
-        }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-        .progress {
-            display: flex;
-            justify-content: center;
-            gap: 35px;
-            margin-bottom: 30px;
-        }
+body {
+    font-family: Arial, sans-serif;
+    background: #f1f2f6;
+    color: #333;
+    padding: 30px 15px;
+}
 
-        .step {
-            background: #ddd;
-            color: #555;
-            width: 35px;
-            height: 35px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-        }
+.progress {
+    display: flex;
+    justify-content: center;
+    gap: 35px;
+    margin-bottom: 30px;
+}
 
-        .step.active {
-            background: #6c63ff;
-            color: white;
-        }
+.step {
+    background: #ddd;
+    color: #555;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
 
-        .page-title {
-            text-align: center;
-            margin-bottom: 25px;
-        }
+.step.active {
+    background: #6c63ff;
+    color: white;
+}
 
-        .final-cv {
-            max-width: 900px;
-            min-height: 850px;
-            margin: auto;
-            background: white;
-            display: grid;
-            grid-template-columns: 280px 1fr;
-            box-shadow: 0 5px 25px rgba(0,0,0,0.12);
-        }
+.page-title {
+    text-align: center;
+    margin-bottom: 25px;
+}
 
-        .cv-sidebar {
-            background: #252b48;
-            color: white;
-            padding: 35px 25px;
-        }
+.final-cv {
+    max-width: 900px;
+    min-height: 850px;
+    margin: auto;
+    background: white;
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    box-shadow: 0 5px 25px rgba(0,0,0,0.12);
+}
 
-        .cv-photo-container {
-            text-align: center;
-            margin-bottom: 25px;
-        }
+.cv-sidebar {
+    background: #252b48;
+    color: white;
+    padding: 35px 25px;
+}
 
-        .cv-photo {
-            width: 135px;
-            height: 135px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 4px solid white;
-            display: inline-block;
-        }
+.cv-photo-container {
+    text-align: center;
+    margin-bottom: 25px;
+}
 
-        .cv-name {
-            font-size: 28px;
-            margin-bottom: 10px;
-            overflow-wrap: anywhere;
-        }
+.cv-photo {
+    width: 145px;
+    height: 145px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid white;
+}
 
-        .cv-job {
-            color: #aaa9ff;
-            font-size: 16px;
-            margin-bottom: 35px;
-        }
+.cv-name {
+    font-size: 28px;
+    margin-bottom: 10px;
+    overflow-wrap: anywhere;
+}
 
-        .cv-sidebar h2 {
-            font-size: 15px;
-            margin: 25px 0 12px;
-            color: #aaa9ff;
-            border-bottom: 1px solid rgba(255,255,255,0.2);
-            padding-bottom: 8px;
-        }
+.cv-job {
+    color: #aaa9ff;
+    font-size: 16px;
+    margin-bottom: 30px;
+}
 
-        .cv-contact p,
-        .cv-sidebar section p {
-            font-size: 13px;
-            line-height: 1.8;
-            overflow-wrap: anywhere;
-        }
+.cv-sidebar h2 {
+    font-size: 15px;
+    margin: 25px 0 12px;
+    color: #aaa9ff;
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+    padding-bottom: 8px;
+}
 
-        .cv-main {
-            padding: 45px 35px;
-        }
+.cv-contact p {
+    font-size: 13px;
+    line-height: 1.8;
+    overflow-wrap: anywhere;
+    display: flex;
+    align-items: flex-start;
+    gap: 9px;
+    margin-bottom: 8px;
+}
 
-        .cv-main section {
-            margin-bottom: 35px;
-        }
+.contact-icon {
+    font-size: 16px;
+    min-width: 20px;
+}
 
-        .cv-main h2 {
-            color: #6c63ff;
-            font-size: 19px;
-            margin-bottom: 15px;
-            border-bottom: 2px solid #eee;
-            padding-bottom: 10px;
-        }
+.cv-main {
+    padding: 45px 35px;
+}
 
-        .cv-main p {
-            white-space: pre-line;
-            line-height: 1.8;
-            font-size: 14px;
-            overflow-wrap: anywhere;
-        }
+.cv-main section {
+    margin-bottom: 35px;
+}
 
-        [hidden] {
-            display: none !important;
-        }
+.cv-main h2 {
+    color: #6c63ff;
+    font-size: 19px;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 10px;
+}
 
-        .cv-actions {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin: 30px auto;
-        }
+.cv-main p,
+.cv-sidebar section p {
+    white-space: pre-line;
+    line-height: 1.8;
+    font-size: 14px;
+    overflow-wrap: anywhere;
+}
 
-        .cv-actions button,
-        .cv-actions a {
-            padding: 14px 22px;
-            border: none;
-            border-radius: 8px;
-            background: #6c63ff;
-            color: white;
-            text-decoration: none;
-            cursor: pointer;
-            font-size: 15px;
-        }
+/* LANGUAGES */
 
-        .cv-actions a {
-            background: #444;
-        }
+.language-item {
+    margin-bottom: 18px;
+}
 
-        .no-data {
-            text-align: center;
-            padding: 40px;
-        }
+.language-info {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 7px;
+    font-size: 13px;
+}
 
-        /* TEMPLATE CLASSIC */
+.language-name {
+    font-weight: bold;
+}
 
-        .final-cv.classic {
-            display: block;
-            padding: 45px;
-            border-top: 8px solid #333;
-            font-family: Georgia, serif;
-        }
+.language-percent {
+    font-weight: bold;
+}
 
-        .classic .cv-sidebar {
-            background: white;
-            color: #333;
-            padding: 0 0 25px;
-            border-bottom: 2px solid #333;
-        }
+.language-bar {
+    height: 7px;
+    background: rgba(150,150,150,0.3);
+    border-radius: 20px;
+    overflow: hidden;
+}
 
-        .classic .cv-photo {
-            border-color: #333;
-        }
+.language-fill {
+    height: 100%;
+    background: #aaa9ff;
+    border-radius: 20px;
+}
 
-        .classic .cv-name {
-            font-family: Georgia, serif;
-            font-size: 36px;
-            color: #222;
-        }
+[hidden] {
+    display: none !important;
+}
 
-        .classic .cv-job {
-            color: #777;
-        }
+.cv-actions {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin: 30px auto;
+}
 
-        .classic .cv-sidebar h2 {
-            color: #333;
-            border-bottom: 1px solid #ccc;
-        }
+.cv-actions button,
+.cv-actions a {
+    padding: 14px 22px;
+    border: none;
+    border-radius: 8px;
+    background: #6c63ff;
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 15px;
+}
 
-        .classic .cv-contact p,
-        .classic .cv-sidebar section p {
-            color: #555;
-        }
+.cv-actions a {
+    background: #444;
+}
 
-        .classic .cv-main {
-            padding: 30px 0;
-        }
+.no-data {
+    text-align: center;
+    padding: 40px;
+}
 
-        .classic .cv-main h2 {
-            color: #333;
-            border-bottom: 1px solid #999;
-            font-family: Georgia, serif;
-        }
+/* CLASSIC */
 
-        /* TEMPLATE CREATIVE */
+.final-cv.classic {
+    display: block;
+    padding: 45px;
+    border-top: 8px solid #333;
+    font-family: Georgia, serif;
+}
 
-        .final-cv.creative .cv-sidebar {
-            background: linear-gradient(160deg, #542c91, #24133f);
-            border-right: 7px solid #ffb347;
-        }
+.classic .cv-sidebar {
+    background: white;
+    color: #333;
+    padding: 0 0 25px;
+    border-bottom: 2px solid #333;
+}
 
-        .creative .cv-photo {
-            border-color: #ffb347;
-        }
+.classic .cv-photo {
+    border-color: #333;
+}
 
-        .creative .cv-name {
-            color: #fff;
-            font-size: 30px;
-        }
+.classic .cv-name {
+    font-size: 36px;
+    color: #222;
+}
 
-        .creative .cv-job {
-            color: #ffcf83;
-        }
+.classic .cv-job {
+    color: #777;
+}
 
-        .creative .cv-sidebar h2 {
-            color: #ffcf83;
-        }
+.classic .cv-sidebar h2 {
+    color: #333;
+    border-bottom: 1px solid #ccc;
+}
 
-        .creative .cv-main h2 {
-            color: #a34ee5;
-            border-bottom: 2px solid #f0dafa;
-        }
+.classic .cv-contact p,
+.classic .cv-sidebar section p {
+    color: #555;
+}
 
-        .creative .cv-main {
-            background: #fffaff;
-        }
+.classic .language-bar {
+    background: #eee;
+}
 
-        @media print {
+.classic .language-fill {
+    background: #555;
+}
 
-            @page {
-                size: A4;
-                margin: 0;
-            }
+.classic .cv-main {
+    padding: 30px 0;
+}
 
-            body {
-                background: white;
-                padding: 0;
-            }
+.classic .cv-main h2 {
+    color: #333;
+    border-bottom: 1px solid #999;
+    font-family: Georgia, serif;
+}
 
-            .progress,
-            .page-title,
-            .cv-actions {
-                display: none !important;
-            }
+/* CREATIVE */
 
-            .final-cv {
-                width: 210mm;
-                max-width: none;
-                min-height: 297mm;
-                margin: 0;
-                box-shadow: none;
-                -webkit-print-color-adjust: exact;
-                print-color-adjust: exact;
-            }
+.final-cv.creative .cv-sidebar {
+    background: linear-gradient(160deg, #542c91, #24133f);
+    border-right: 7px solid #ffb347;
+}
 
-            .final-cv:not(.classic) {
-                grid-template-columns: 280px 1fr;
-            }
+.creative .cv-name {
+    color: white;
+    font-size: 30px;
+}
 
-            .final-cv.classic {
-                display: block;
-                padding: 35px;
-            }
-        }
+.creative .cv-job {
+    color: #ffcf83;
+}
 
-        @media (max-width: 650px) {
+.creative .cv-sidebar h2 {
+    color: #ffcf83;
+}
 
-            .final-cv {
-                grid-template-columns: 1fr;
-            }
+.creative .language-fill {
+    background: #ffcf83;
+}
 
-            .final-cv.classic {
-                padding: 25px;
-            }
+.creative .cv-main h2 {
+    color: #a34ee5;
+    border-bottom: 2px solid #f0dafa;
+}
 
-            .cv-main {
-                padding: 30px 25px;
-            }
+.creative .cv-main {
+    background: #fffaff;
+}
 
-            .cv-actions {
-                flex-direction: column;
-                align-items: center;
-            }
-        }
+/* PRINT */
 
-    </style>
+@media print {
+
+    @page {
+        size: A4;
+        margin: 0;
+    }
+
+    body {
+        background: white;
+        padding: 0;
+    }
+
+    .progress,
+    .page-title,
+    .cv-actions {
+        display: none !important;
+    }
+
+    .final-cv {
+        width: 210mm;
+        max-width: none;
+        min-height: 297mm;
+        margin: 0;
+        box-shadow: none;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    .final-cv:not(.classic) {
+        grid-template-columns: 280px 1fr;
+    }
+
+    .final-cv.classic {
+        display: block;
+        padding: 35px;
+    }
+}
+
+@media(max-width:650px) {
+
+    .final-cv {
+        grid-template-columns: 1fr;
+    }
+
+    .final-cv.classic {
+        padding: 25px;
+    }
+
+    .cv-main {
+        padding: 30px 25px;
+    }
+
+    .cv-actions {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+</style>
 </head>
 
 <body>
 
-    <div class="progress">
-        <div class="step">1</div>
-        <div class="step">2</div>
-        <div class="step active">3</div>
-    </div>
+<div class="progress">
+    <div class="step">1</div>
+    <div class="step">2</div>
+    <div class="step active">3</div>
+</div>
 
-    <h1 class="page-title" id="pageTitle">
-        Votre CV est prêt !
-    </h1>
-
-    <div id="noData" class="no-data" hidden>
-        <h2 id="noDataTitle">Aucune information trouvée.</h2>
-
-        <p id="noDataMessage">
-            Veuillez remplir le formulaire avant de créer votre CV.
-        </p>
-
-        <br>
-
-        <a href="create.html" id="createLink">
-            Créer mon CV
-        </a>
-    </div>
-
-    <div class="final-cv" id="finalCV" hidden>
-
-        <aside class="cv-sidebar">
-
-            <!-- PHOTO -->
-
-            <div class="cv-photo-container" id="photoContainer" hidden>
-
-                <img
-                    id="cvPhoto"
-                    class="cv-photo"
-                    alt="Profile photo"
-                >
-
-            </div>
-
-            <h1 class="cv-name" id="cvName"></h1>
-
-            <div class="cv-job" id="cvJob"></div>
-
-            <div class="cv-contact">
-
-                <h2 id="contactTitle">CONTACT</h2>
-
-                <p id="cvEmail"></p>
-                <p id="cvPhone"></p>
-                <p id="cvAddress"></p>
-
-            </div>
-
-            <section id="skillsSection" hidden>
-
-                <h2 id="skillsTitle">COMPÉTENCES</h2>
-
-                <p id="cvSkills"></p>
-
-            </section>
-
-            <section id="languagesSection" hidden>
-
-                <h2 id="languagesTitle">LANGUES</h2>
-
-                <p id="cvLanguages"></p>
-
-            </section>
-
-        </aside>
-
-        <main class="cv-main">
-
-            <section id="profileSection" hidden>
-
-                <h2 id="profileTitle">PROFIL</h2>
-
-                <p id="cvProfile"></p>
-
-            </section>
-
-            <section id="educationSection" hidden>
-
-                <h2 id="educationTitle">FORMATION</h2>
-
-                <p id="cvEducation"></p>
-
-            </section>
-
-            <section id="experienceSection" hidden>
-
-                <h2 id="experienceTitle">
-                    EXPÉRIENCE PROFESSIONNELLE
-                </h2>
-
-                <p id="cvExperience"></p>
-
-            </section>
-
-        </main>
-
-    </div>
-
-    <div class="cv-actions" id="actions" hidden>
-
-        <a href="create.html" id="editButton">
-            Modifier mon CV
-        </a>
-
-        <button onclick="window.print()" id="downloadButton">
-            Télécharger mon CV PDF
-        </button>
-
-    </div>
-
-    <script>
-
-        // Récupération des données
-
-        const cvData = localStorage.getItem("cvData");
-
-        const selectedTemplate =
-            localStorage.getItem("selectedTemplate") || "modern";
-
-        const finalCV = document.getElementById("finalCV");
-
-        const noData = document.getElementById("noData");
-
-        const actions = document.getElementById("actions");
-
-
-        // Traductions
-
-        const translations = {
-
-            fr: {
-                pageTitle: "Votre CV est prêt !",
-                noDataTitle: "Aucune information trouvée.",
-                noDataMessage: "Veuillez remplir le formulaire avant de créer votre CV.",
-                createLink: "Créer mon CV",
-                contact: "CONTACT",
-                skills: "COMPÉTENCES",
-                languages: "LANGUES",
-                profile: "PROFIL",
-                education: "FORMATION",
-                experience: "EXPÉRIENCE PROFESSIONNELLE",
-                edit: "Modifier mon CV",
-                download: "Télécharger mon CV PDF",
-                defaultName: "Votre nom",
-                documentTitle: "Mon CV"
-            },
-
-            en: {
-                pageTitle: "Your CV is ready!",
-                noDataTitle: "No information found.",
-                noDataMessage: "Please fill in the form before creating your CV.",
-                createLink: "Create my CV",
-                contact: "CONTACT",
-                skills: "SKILLS",
-                languages: "LANGUAGES",
-                profile: "PROFILE",
-                education: "EDUCATION",
-                experience: "WORK EXPERIENCE",
-                edit: "Edit my CV",
-                download: "Download my CV PDF",
-                defaultName: "Your name",
-                documentTitle: "My CV"
-            }
-
-        };
-
-
-        // قراءة لغة السيرة الذاتية
-
-        let language = "fr";
-
-        let data = null;
-
-        if (cvData) {
-
-            try {
-
-                data = JSON.parse(cvData);
-
-                if (data.cvLanguage === "en") {
-                    language = "en";
-                }
-
-            } catch (error) {
-
-                console.error(error);
-
-            }
-
-        }
-
-
-        // اختيار الترجمة
-
+<h1 class="page-title" id="pageTitle">
+    Votre CV est prêt !
+</h1>
+
+<div id="noData" class="no-data" hidden>
+    <h2 id="errorTitle">Aucune information trouvée.</h2>
+    <p id="errorText">Veuillez remplir le formulaire avant de créer votre CV.</p>
+    <br>
+    <a href="create.html" id="createLink">Créer mon CV</a>
+</div>
+
+<div class="final-cv" id="finalCV" hidden>
+
+    <aside class="cv-sidebar">
+
+        <div class="cv-photo-container" id="photoContainer" hidden>
+            <img id="cvPhoto" class="cv-photo" alt="Photo de profil">
+        </div>
+
+        <h1 class="cv-name" id="cvName"></h1>
+        <div class="cv-job" id="cvJob"></div>
+
+        <div class="cv-contact">
+
+            <h2 id="contactTitle">CONTACT</h2>
+
+            <p id="emailRow" hidden>
+                <span class="contact-icon">✉</span>
+                <span id="cvEmail"></span>
+            </p>
+
+            <p id="phoneRow" hidden>
+                <span class="contact-icon">☎</span>
+                <span id="cvPhone"></span>
+            </p>
+
+            <p id="addressRow" hidden>
+                <span class="contact-icon">📍</span>
+                <span id="cvAddress"></span>
+            </p>
+
+        </div>
+
+        <section id="skillsSection" hidden>
+            <h2 id="skillsTitle">COMPÉTENCES</h2>
+            <p id="cvSkills"></p>
+        </section>
+
+        <section id="languagesSection" hidden>
+            <h2 id="languagesTitle">LANGUES</h2>
+            <div id="cvLanguages"></div>
+        </section>
+
+    </aside>
+
+    <main class="cv-main">
+
+        <section id="profileSection" hidden>
+            <h2 id="profileTitle">PROFIL</h2>
+            <p id="cvProfile"></p>
+        </section>
+
+        <section id="educationSection" hidden>
+            <h2 id="educationTitle">FORMATION</h2>
+            <p id="cvEducation"></p>
+        </section>
+
+        <section id="experienceSection" hidden>
+            <h2 id="experienceTitle">EXPÉRIENCE PROFESSIONNELLE</h2>
+            <p id="cvExperience"></p>
+        </section>
+
+    </main>
+
+</div>
+
+<div class="cv-actions" id="actions" hidden>
+    <a href="create.html" id="editButton">Modifier mon CV</a>
+    <button onclick="window.print()" id="downloadButton">
+        Télécharger mon CV PDF
+    </button>
+</div>
+
+<script>
+
+const cvData = localStorage.getItem("cvData");
+const selectedTemplate = localStorage.getItem("selectedTemplate") || "modern";
+
+const finalCV = document.getElementById("finalCV");
+const noData = document.getElementById("noData");
+const actions = document.getElementById("actions");
+
+const translations = {
+
+    fr: {
+        pageTitle: "Votre CV est prêt !",
+        errorTitle: "Aucune information trouvée.",
+        errorText: "Veuillez remplir le formulaire avant de créer votre CV.",
+        create: "Créer mon CV",
+        contact: "CONTACT",
+        skills: "COMPÉTENCES",
+        languages: "LANGUES",
+        profile: "PROFIL",
+        education: "FORMATION",
+        experience: "EXPÉRIENCE PROFESSIONNELLE",
+        edit: "Modifier mon CV",
+        download: "Télécharger mon CV PDF",
+        name: "Votre nom"
+    },
+
+    en: {
+        pageTitle: "Your CV is ready!",
+        errorTitle: "No information found.",
+        errorText: "Please complete the form before creating your CV.",
+        create: "Create my CV",
+        contact: "CONTACT",
+        skills: "SKILLS",
+        languages: "LANGUAGES",
+        profile: "PROFILE",
+        education: "EDUCATION",
+        experience: "WORK EXPERIENCE",
+        edit: "Edit my CV",
+        download: "Download my CV PDF",
+        name: "Your name"
+    }
+
+};
+
+function setText(id, value) {
+    document.getElementById(id).textContent = value || "";
+}
+
+function showSection(sectionId, contentId, value) {
+
+    const section = document.getElementById(sectionId);
+
+    if (value && value.trim() !== "") {
+        setText(contentId, value);
+        section.hidden = false;
+    } else {
+        section.hidden = true;
+    }
+
+}
+
+if (cvData) {
+
+    try {
+
+        const data = JSON.parse(cvData);
+
+        const language = data.cvLanguage === "en" ? "en" : "fr";
         const t = translations[language];
 
-
-        // تغيير لغة الصفحة
-
         document.documentElement.lang = language;
+        document.title = language === "en" ? "My CV | CVMaker" : "Mon CV | CVMaker";
 
-        document.title = t.documentTitle;
+        setText("pageTitle", t.pageTitle);
+        setText("errorTitle", t.errorTitle);
+        setText("errorText", t.errorText);
+        setText("createLink", t.create);
+        setText("contactTitle", t.contact);
+        setText("skillsTitle", t.skills);
+        setText("languagesTitle", t.languages);
+        setText("profileTitle", t.profile);
+        setText("educationTitle", t.education);
+        setText("experienceTitle", t.experience);
+        setText("editButton", t.edit);
+        setText("downloadButton", t.download);
 
+        // Template
 
-        // ترجمة عناصر الصفحة
+        const allowedTemplates = ["modern", "classic", "creative"];
 
-        function translatePage() {
+        const template = allowedTemplates.includes(selectedTemplate)
+            ? selectedTemplate
+            : "modern";
 
-            document.getElementById("pageTitle").textContent =
-                t.pageTitle;
+        finalCV.classList.add(template);
 
-            document.getElementById("noDataTitle").textContent =
-                t.noDataTitle;
+        // Informations personnelles
 
-            document.getElementById("noDataMessage").textContent =
-                t.noDataMessage;
+        setText("cvName", data.name || t.name);
+        setText("cvJob", data.job || "");
 
-            document.getElementById("createLink").textContent =
-                t.createLink;
+        // Photo
 
-            document.getElementById("contactTitle").textContent =
-                t.contact;
-
-            document.getElementById("skillsTitle").textContent =
-                t.skills;
-
-            document.getElementById("languagesTitle").textContent =
-                t.languages;
-
-            document.getElementById("profileTitle").textContent =
-                t.profile;
-
-            document.getElementById("educationTitle").textContent =
-                t.education;
-
-            document.getElementById("experienceTitle").textContent =
-                t.experience;
-
-            document.getElementById("editButton").textContent =
-                t.edit;
-
-            document.getElementById("downloadButton").textContent =
-                t.download;
-
+        if (data.photo) {
+            document.getElementById("cvPhoto").src = data.photo;
+            document.getElementById("photoContainer").hidden = false;
         }
 
-        translatePage();
+        // Contact
 
+        const contacts = [
+            ["emailRow", "cvEmail", data.email],
+            ["phoneRow", "cvPhone", data.phone],
+            ["addressRow", "cvAddress", data.address]
+        ];
 
-        // عرض البيانات
+        contacts.forEach(function(item) {
+            const row = document.getElementById(item[0]);
 
-        if (data) {
-
-            try {
-
-                // اختيار التصميم
-
-                const allowedTemplates = [
-                    "modern",
-                    "classic",
-                    "creative"
-                ];
-
-                const template = allowedTemplates.includes(selectedTemplate)
-                    ? selectedTemplate
-                    : "modern";
-
-                finalCV.classList.add(template);
-
-
-                // دالة عرض النصوص
-
-                function setText(id, value) {
-
-                    document.getElementById(id).textContent =
-                        value || "";
-
-                }
-
-
-                // دالة عرض أو إخفاء الأقسام
-
-                function showSection(sectionId, contentId, value) {
-
-                    const section =
-                        document.getElementById(sectionId);
-
-                    if (value && value.trim() !== "") {
-
-                        setText(contentId, value);
-
-                        section.hidden = false;
-
-                    } else {
-
-                        section.hidden = true;
-
-                    }
-
-                }
-
-
-                // المعلومات الشخصية
-
-                setText("cvName", data.name || t.defaultName);
-
-                setText("cvJob", data.job || "");
-
-                setText("cvEmail", data.email || "");
-
-                setText("cvPhone", data.phone || "");
-
-                setText("cvAddress", data.address || "");
-
-
-                // الصورة الشخصية
-
-                if (data.photo) {
-
-                    const photo =
-                        document.getElementById("cvPhoto");
-
-                    photo.src = data.photo;
-
-                    document.getElementById("photoContainer").hidden =
-                        false;
-
-                }
-
-
-                // الأقسام الأخرى
-
-                showSection(
-                    "profileSection",
-                    "cvProfile",
-                    data.profile || ""
-                );
-
-                showSection(
-                    "educationSection",
-                    "cvEducation",
-                    data.education || ""
-                );
-
-                showSection(
-                    "experienceSection",
-                    "cvExperience",
-                    data.experience || ""
-                );
-
-                showSection(
-                    "skillsSection",
-                    "cvSkills",
-                    data.skills || ""
-                );
-
-                showSection(
-                    "languagesSection",
-                    "cvLanguages",
-                    data.languages || ""
-                );
-
-
-                // إظهار CV
-
-                finalCV.hidden = false;
-
-                actions.hidden = false;
-
-            } catch (error) {
-
-                console.error(error);
-
-                noData.hidden = false;
-
-                document.getElementById("noDataTitle").textContent =
-                    language === "en"
-                    ? "An error occurred."
-                    : "Une erreur est survenue.";
-
+            if (item[2]) {
+                setText(item[1], item[2]);
+                row.hidden = false;
             }
+        });
+
+        // Profil, formation, expérience et compétences
+
+        showSection("profileSection", "cvProfile", data.profile || "");
+        showSection("educationSection", "cvEducation", data.education || "");
+        showSection("experienceSection", "cvExperience", data.experience || "");
+        showSection("skillsSection", "cvSkills", data.skills || "");
+
+        // Langues avec pourcentages
+
+        const languagesContainer = document.getElementById("cvLanguages");
+
+        let languages = data.languages || [];
+
+        // Compatibilité avec les anciennes données textuelles
+
+        if (typeof languages === "string") {
+            languages = languages.split(",").map(function(name) {
+                return {
+                    name: name.trim(),
+                    level: 50
+                };
+            }).filter(function(item) {
+                return item.name;
+            });
+        }
+
+        if (languages.length > 0) {
+
+            languagesContainer.innerHTML = "";
+
+            languages.forEach(function(languageItem) {
+
+                const name = languageItem.name || "";
+                const level = Math.min(100, Math.max(0, Number(languageItem.level) || 0));
+
+                const item = document.createElement("div");
+                item.className = "language-item";
+
+                const info = document.createElement("div");
+                info.className = "language-info";
+
+                const languageName = document.createElement("span");
+                languageName.className = "language-name";
+                languageName.textContent = name;
+
+                const percentage = document.createElement("span");
+                percentage.className = "language-percent";
+                percentage.textContent = level + "%";
+
+                info.appendChild(languageName);
+                info.appendChild(percentage);
+
+                const bar = document.createElement("div");
+                bar.className = "language-bar";
+
+                const fill = document.createElement("div");
+                fill.className = "language-fill";
+                fill.style.width = level + "%";
+
+                bar.appendChild(fill);
+
+                item.appendChild(info);
+                item.appendChild(bar);
+
+                languagesContainer.appendChild(item);
+
+            });
+
+            document.getElementById("languagesSection").hidden = false;
 
         } else {
 
-            noData.hidden = false;
+            document.getElementById("languagesSection").hidden = true;
 
         }
 
-    </script>
+        finalCV.hidden = false;
+        actions.hidden = false;
+
+    } catch(error) {
+
+        console.error(error);
+        noData.hidden = false;
+
+    }
+
+} else {
+
+    noData.hidden = false;
+
+}
+
+</script>
 
 </body>
 </html>
