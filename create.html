@@ -1,516 +1,478 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Créer mon CV | CVMaker</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Créer mon CV | CVMaker</title>
+<link rel="stylesheet" href="style.css">
 
-    <link rel="stylesheet" href="style.css">
+<style>
+.create-page {
+    min-height: 100vh;
+    padding: 40px 20px;
+    background: #f5f6fa;
+    color: #222;
+}
 
-    <style>
-        .create-page {
-            min-height: 100vh;
-            padding: 40px 20px;
-            background: #f5f6fa;
-            color: #222;
-        }
+.progress-container {
+    max-width: 750px;
+    margin: 0 auto 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
-        .progress-container {
-            max-width: 750px;
-            margin: 0 auto 45px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+.progress-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 9px;
+    color: #999;
+    font-size: 13px;
+    font-weight: bold;
+    white-space: nowrap;
+}
 
-        .progress-step {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 9px;
-            color: #999;
-            font-size: 13px;
-            font-weight: bold;
-            white-space: nowrap;
-        }
+.step-circle {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: #e1e4ec;
+    color: #777;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
-        .step-circle {
-            width: 42px;
-            height: 42px;
-            border-radius: 50%;
-            background: #e1e4ec;
-            color: #777;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+.progress-step.active {
+    color: #6c63ff;
+}
 
-        .progress-step.active {
-            color: #6c63ff;
-        }
+.progress-step.active .step-circle {
+    background: #6c63ff;
+    color: white;
+}
 
-        .progress-step.active .step-circle {
-            background: #6c63ff;
-            color: white;
-        }
+.progress-line {
+    height: 3px;
+    flex: 1;
+    background: #e1e4ec;
+    margin: 0 12px 25px;
+}
 
-        .progress-line {
-            height: 3px;
-            flex: 1;
-            background: #e1e4ec;
-            margin: 0 12px 25px;
-        }
+.form-header {
+    text-align: center;
+    margin-bottom: 35px;
+}
 
-        .form-header {
-            text-align: center;
-            margin-bottom: 35px;
-        }
+.form-header h1 {
+    font-size: 32px;
+    margin-bottom: 10px;
+}
 
-        .form-header h1 {
-            font-size: 32px;
-            margin-bottom: 10px;
-            color: #222;
-        }
+.form-header p {
+    color: #777;
+}
 
-        .form-header p {
-            color: #777;
-            font-size: 16px;
-        }
+#cvForm {
+    max-width: 850px;
+    margin: auto;
+    background: white;
+    padding: 35px;
+    border-radius: 15px;
+    box-shadow: 0 5px 25px rgba(0,0,0,0.06);
+}
 
-        #cvForm {
-            max-width: 850px;
-            margin: auto;
-            background: white;
-            padding: 35px;
-            border-radius: 15px;
-            box-shadow: 0 5px 25px rgba(0,0,0,0.06);
-        }
+.form-section {
+    margin-bottom: 30px;
+}
 
-        .form-section {
-            margin-bottom: 30px;
-        }
+.form-section h2 {
+    font-size: 20px;
+    color: #6c63ff;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+}
 
-        .form-section h2 {
-            font-size: 20px;
-            color: #6c63ff;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid #eee;
-        }
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
 
-        .form-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 18px;
+}
 
-        .input-group {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            margin-bottom: 18px;
-        }
+.input-group label {
+    font-weight: 600;
+    color: #333;
+}
 
-        .input-group label {
-            font-weight: 600;
-            color: #333;
-        }
+.input-group input,
+.input-group textarea,
+.input-group select {
+    width: 100%;
+    padding: 13px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 15px;
+    font-family: inherit;
+    box-sizing: border-box;
+    outline: none;
+}
 
-        .input-group input,
-        .input-group textarea,
-        .input-group select {
-            width: 100%;
-            padding: 13px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            font-size: 15px;
-            font-family: inherit;
-            box-sizing: border-box;
-            outline: none;
-        }
+.input-group input:focus,
+.input-group textarea:focus,
+.input-group select:focus {
+    border-color: #6c63ff;
+}
 
-        .input-group input:focus,
-        .input-group textarea:focus,
-        .input-group select:focus {
-            border-color: #6c63ff;
-        }
+.input-group textarea {
+    min-height: 110px;
+    resize: vertical;
+}
 
-        .input-group textarea {
-            min-height: 110px;
-            resize: vertical;
-        }
+/* Photo */
 
-        /* Photo de profil */
+.photo-upload {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    flex-wrap: wrap;
+}
 
-        .photo-upload {
-            display: flex;
-            align-items: center;
-            gap: 25px;
-            flex-wrap: wrap;
-        }
+.photo-preview {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 3px dashed #c9c6ff;
+    background: #f5f4ff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    color: #777;
+    font-size: 13px;
+}
 
-        .photo-preview {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            border: 3px dashed #c9c6ff;
-            background: #f5f4ff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            color: #777;
-            text-align: center;
-            font-size: 13px;
-        }
+.photo-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
 
-        .photo-preview img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
+.photo-help {
+    font-size: 13px;
+    color: #888;
+}
 
-        .photo-upload input {
-            max-width: 280px;
-        }
+/* Languages */
 
-        .photo-help {
-            font-size: 13px;
-            color: #888;
-        }
+.language-card {
+    background: #f8f8ff;
+    border: 1px solid #e6e3ff;
+    padding: 18px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
 
-        .generate-button {
-            display: block;
-            width: 100%;
-            padding: 16px;
-            border: none;
-            border-radius: 9px;
-            background: #6c63ff;
-            color: white;
-            font-size: 17px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: 0.3s;
-        }
+.language-card .input-group {
+    margin-bottom: 12px;
+}
 
-        .generate-button:hover {
-            background: #554bd8;
-        }
+.language-range {
+    width: 100%;
+    accent-color: #6c63ff;
+    cursor: pointer;
+}
 
-        .back-link {
-            display: block;
-            text-align: center;
-            margin-top: 25px;
-            color: #6c63ff;
-            text-decoration: none;
-        }
+.language-level {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+    color: #6c63ff;
+}
 
-        @media (max-width: 600px) {
-            #cvForm {
-                padding: 20px;
-            }
+.remove-language {
+    background: #ffe8e8;
+    color: #d33;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+}
 
-            .form-grid {
-                grid-template-columns: 1fr;
-                gap: 0;
-            }
+.add-language {
+    background: #eeeaff;
+    color: #6c63ff;
+    border: 1px solid #d8d2ff;
+    padding: 12px 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
 
-            .form-header h1 {
-                font-size: 25px;
-            }
+.generate-button {
+    display: block;
+    width: 100%;
+    padding: 16px;
+    border: none;
+    border-radius: 9px;
+    background: #6c63ff;
+    color: white;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
 
-            .progress-step {
-                font-size: 10px;
-            }
+.generate-button:hover {
+    background: #554bd8;
+}
 
-            .step-circle {
-                width: 32px;
-                height: 32px;
-            }
+.back-link {
+    display: block;
+    text-align: center;
+    margin-top: 25px;
+    color: #6c63ff;
+    text-decoration: none;
+}
 
-            .progress-line {
-                margin: 0 5px 22px;
-            }
-        }
-    </style>
+@media(max-width:600px) {
+    #cvForm {
+        padding: 20px;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+    .form-header h1 {
+        font-size: 25px;
+    }
+
+    .progress-step {
+        font-size: 10px;
+    }
+
+    .step-circle {
+        width: 32px;
+        height: 32px;
+    }
+
+    .progress-line {
+        margin: 0 5px 22px;
+    }
+}
+</style>
 </head>
 
 <body>
 
 <main class="create-page">
 
-    <!-- Progression -->
-
-    <div class="progress-container">
-
-        <div class="progress-step active">
-            <div class="step-circle">1</div>
-            <span>Modèle</span>
-        </div>
-
-        <div class="progress-line"></div>
-
-        <div class="progress-step active">
-            <div class="step-circle">2</div>
-            <span>Informations</span>
-        </div>
-
-        <div class="progress-line"></div>
-
-        <div class="progress-step">
-            <div class="step-circle">3</div>
-            <span>Aperçu</span>
-        </div>
-
-        <div class="progress-line"></div>
-
-        <div class="progress-step">
-            <div class="step-circle">4</div>
-            <span>PDF</span>
-        </div>
-
+<div class="progress-container">
+    <div class="progress-step active">
+        <div class="step-circle">1</div>
+        <span>Modèle</span>
     </div>
 
-    <!-- Header -->
+    <div class="progress-line"></div>
 
-    <div class="form-header">
-
-        <h1>Créez votre CV professionnel</h1>
-
-        <p>
-            Remplissez les informations ci-dessous pour générer votre CV.
-        </p>
-
+    <div class="progress-step active">
+        <div class="step-circle">2</div>
+        <span>Informations</span>
     </div>
 
-    <!-- Formulaire -->
+    <div class="progress-line"></div>
 
-    <form id="cvForm">
+    <div class="progress-step">
+        <div class="step-circle">3</div>
+        <span>Aperçu</span>
+    </div>
 
-        <!-- Informations personnelles -->
+    <div class="progress-line"></div>
 
-        <section class="form-section">
+    <div class="progress-step">
+        <div class="step-circle">4</div>
+        <span>PDF</span>
+    </div>
+</div>
 
-            <h2>Informations personnelles</h2>
+<div class="form-header">
+    <h1>Créez votre CV professionnel</h1>
+    <p>Remplissez les informations ci-dessous pour générer votre CV.</p>
+</div>
 
-            <!-- Photo -->
+<form id="cvForm">
 
-            <div class="input-group">
+<!-- INFORMATIONS PERSONNELLES -->
 
-                <label for="photo">Photo de profil</label>
+<section class="form-section">
 
-                <div class="photo-upload">
+<h2>Informations personnelles</h2>
 
-                    <div class="photo-preview" id="photoPreview">
-                        Votre photo
-                    </div>
+<div class="input-group">
+    <label for="photo">Photo de profil</label>
 
-                    <div>
-                        <input
-                            type="file"
-                            id="photo"
-                            accept="image/*"
-                        >
+    <div class="photo-upload">
+        <div class="photo-preview" id="photoPreview">
+            Votre photo
+        </div>
 
-                        <p class="photo-help">
-                            Choisissez une photo depuis votre ordinateur.
-                        </p>
-                    </div>
+        <div>
+            <input type="file" id="photo" accept="image/*">
+            <p class="photo-help">
+                Choisissez une photo depuis votre ordinateur.
+            </p>
+        </div>
+    </div>
+</div>
 
-                </div>
+<div class="form-grid">
 
-            </div>
+    <div class="input-group">
+        <label for="name">Nom complet</label>
+        <input type="text" id="name"
+        placeholder="Ex : Ahmed Benali" required>
+    </div>
 
-            <div class="form-grid">
+    <div class="input-group">
+        <label for="job">Poste recherché</label>
+        <input type="text" id="job"
+        placeholder="Ex : Développeur Web" required>
+    </div>
 
-                <div class="input-group">
-                    <label for="name">Nom complet</label>
-                    <input
-                        type="text"
-                        id="name"
-                        placeholder="Ex : Ahmed Benali"
-                        required
-                    >
-                </div>
+    <div class="input-group">
+        <label for="email">Adresse e-mail</label>
+        <input type="email" id="email"
+        placeholder="Ex : exemple@gmail.com">
+    </div>
 
-                <div class="input-group">
-                    <label for="job">Poste recherché</label>
-                    <input
-                        type="text"
-                        id="job"
-                        placeholder="Ex : Développeur Web"
-                        required
-                    >
-                </div>
+    <div class="input-group">
+        <label for="phone">Téléphone</label>
+        <input type="tel" id="phone"
+        placeholder="Ex : 06 00 00 00 00">
+    </div>
 
-                <div class="input-group">
-                    <label for="email">Adresse e-mail</label>
-                    <input
-                        type="email"
-                        id="email"
-                        placeholder="Ex : exemple@gmail.com"
-                    >
-                </div>
+</div>
 
-                <div class="input-group">
-                    <label for="phone">Téléphone</label>
-                    <input
-                        type="tel"
-                        id="phone"
-                        placeholder="Ex : 06 00 00 00 00"
-                    >
-                </div>
+<div class="input-group">
+    <label for="address">Adresse</label>
+    <input type="text" id="address"
+    placeholder="Ex : Casablanca, Maroc">
+</div>
 
-            </div>
+</section>
 
-            <div class="input-group">
+<!-- PROFIL -->
 
-                <label for="address">Adresse</label>
+<section class="form-section">
 
-                <input
-                    type="text"
-                    id="address"
-                    placeholder="Ex : Casablanca, Maroc"
-                >
+<h2>Profil professionnel</h2>
 
-            </div>
+<div class="input-group">
+    <label for="profile">À propos de vous</label>
+    <textarea id="profile"
+    placeholder="Présentez-vous en quelques phrases..."></textarea>
+</div>
 
-        </section>
+</section>
 
-        <!-- Profil professionnel -->
+<!-- FORMATION -->
 
-        <section class="form-section">
+<section class="form-section">
 
-            <h2>Profil professionnel</h2>
+<h2>Formation</h2>
 
-            <div class="input-group">
+<div class="input-group">
+    <label for="education">Diplômes et formations</label>
+    <textarea id="education"
+    placeholder="Ex : Baccalauréat - Sciences expérimentales - 2025"></textarea>
+</div>
 
-                <label for="profile">À propos de vous</label>
+</section>
 
-                <textarea
-                    id="profile"
-                    placeholder="Présentez-vous en quelques phrases..."
-                ></textarea>
+<!-- EXPERIENCE -->
 
-            </div>
+<section class="form-section">
 
-        </section>
+<h2>Expérience professionnelle</h2>
 
-        <!-- Formation -->
+<div class="input-group">
+    <label for="experience">Vos expériences</label>
+    <textarea id="experience"
+    placeholder="Décrivez vos expériences professionnelles..."></textarea>
+</div>
 
-        <section class="form-section">
+</section>
 
-            <h2>Formation</h2>
+<!-- COMPETENCES -->
 
-            <div class="input-group">
+<section class="form-section">
 
-                <label for="education">Diplômes et formations</label>
+<h2>Compétences</h2>
 
-                <textarea
-                    id="education"
-                    placeholder="Ex : Baccalauréat - Sciences expérimentales - 2025"
-                ></textarea>
+<div class="input-group">
+    <label for="skills">Vos compétences</label>
+    <textarea id="skills"
+    placeholder="Ex : Informatique, communication, travail en équipe..."></textarea>
+</div>
 
-            </div>
+</section>
 
-        </section>
+<!-- LANGUES -->
 
-        <!-- Expérience -->
+<section class="form-section">
 
-        <section class="form-section">
+<h2>Langues</h2>
 
-            <h2>Expérience professionnelle</h2>
+<p style="color:#777; margin-bottom:15px;">
+Ajoutez les langues que vous maîtrisez et choisissez votre niveau.
+</p>
 
-            <div class="input-group">
+<div id="languagesContainer"></div>
 
-                <label for="experience">Vos expériences</label>
+<button type="button" class="add-language" id="addLanguage">
+    + Ajouter une langue
+</button>
 
-                <textarea
-                    id="experience"
-                    placeholder="Décrivez vos expériences professionnelles..."
-                ></textarea>
+</section>
 
-            </div>
+<!-- LANGUE DU CV -->
 
-        </section>
+<section class="form-section">
 
-        <!-- Compétences -->
+<h2>Langue du CV final</h2>
 
-        <section class="form-section">
+<div class="input-group">
+    <label for="cvLanguage">Choisissez la langue de votre CV</label>
 
-            <h2>Compétences</h2>
+    <select id="cvLanguage" required>
+        <option value="fr">Français 🇫🇷</option>
+        <option value="en">English 🇬🇧</option>
+    </select>
+</div>
 
-            <div class="input-group">
+</section>
 
-                <label for="skills">Vos compétences</label>
+<button type="submit" class="generate-button">
+    Générer mon CV →
+</button>
 
-                <textarea
-                    id="skills"
-                    placeholder="Ex : Informatique, communication, travail en équipe..."
-                ></textarea>
+<a href="index.html" class="back-link">
+    ← Retour à l'accueil
+</a>
 
-            </div>
-
-        </section>
-
-        <!-- Langues -->
-
-        <section class="form-section">
-
-            <h2>Langues</h2>
-
-            <div class="input-group">
-
-                <label for="languages">Langues maîtrisées</label>
-
-                <textarea
-                    id="languages"
-                    placeholder="Ex : Arabe, Français, Anglais..."
-                ></textarea>
-
-            </div>
-
-        </section>
-
-        <!-- Langue du CV final -->
-
-        <section class="form-section">
-
-            <h2>Langue du CV final</h2>
-
-            <div class="input-group">
-
-                <label for="cvLanguage">
-                    Choisissez la langue de votre CV
-                </label>
-
-                <select id="cvLanguage" required>
-
-                    <option value="fr">Français 🇫🇷</option>
-
-                    <option value="en">English 🇬🇧</option>
-
-                </select>
-
-            </div>
-
-        </section>
-
-        <!-- Bouton -->
-
-        <button type="submit" class="generate-button" id="generateBtn">
-            Générer mon CV →
-        </button>
-
-        <a href="index.html" class="back-link">
-            ← Retour à l'accueil
-        </a>
-
-    </form>
-
+</form>
 </main>
-
-<!-- JavaScript -->
 
 <script>
 
@@ -519,10 +481,69 @@ document.addEventListener("DOMContentLoaded", function() {
     const form = document.getElementById("cvForm");
     const photoInput = document.getElementById("photo");
     const photoPreview = document.getElementById("photoPreview");
+    const languagesContainer = document.getElementById("languagesContainer");
 
     let photoData = "";
 
-    // Prévisualisation et compression de la photo
+    // Ajouter une langue
+
+    function addLanguage(name = "", level = 50) {
+
+        const card = document.createElement("div");
+        card.className = "language-card";
+
+        card.innerHTML = `
+            <div class="input-group">
+                <label>Nom de la langue</label>
+                <input type="text" class="language-name"
+                placeholder="Ex : Français"
+                value="${name.replace(/"/g, "&quot;")}" required>
+            </div>
+
+            <div class="input-group">
+
+                <div class="language-level">
+                    <label>Niveau de maîtrise</label>
+                    <span class="level-value">${level}%</span>
+                </div>
+
+                <input type="range"
+                class="language-range"
+                min="0"
+                max="100"
+                value="${level}">
+            </div>
+
+            <button type="button" class="remove-language">
+                Supprimer cette langue
+            </button>
+        `;
+
+        const range = card.querySelector(".language-range");
+        const value = card.querySelector(".level-value");
+
+        range.addEventListener("input", function() {
+            value.textContent = this.value + "%";
+        });
+
+        card.querySelector(".remove-language").addEventListener("click", function() {
+            card.remove();
+        });
+
+        languagesContainer.appendChild(card);
+    }
+
+    document.getElementById("addLanguage").addEventListener("click", function() {
+        addLanguage();
+    });
+
+    // Langues initiales
+
+    addLanguage("Arabe", 100);
+    addLanguage("Français", 75);
+    addLanguage("Anglais", 50);
+
+    // Photo et compression
 
     photoInput.addEventListener("change", function() {
 
@@ -549,7 +570,6 @@ document.addEventListener("DOMContentLoaded", function() {
             image.onload = function() {
 
                 const canvas = document.createElement("canvas");
-
                 const maxSize = 600;
 
                 let width = image.width;
@@ -567,7 +587,6 @@ document.addEventListener("DOMContentLoaded", function() {
                 canvas.height = height;
 
                 const context = canvas.getContext("2d");
-
                 context.drawImage(image, 0, 0, width, height);
 
                 photoData = canvas.toDataURL("image/jpeg", 0.8);
@@ -575,21 +594,16 @@ document.addEventListener("DOMContentLoaded", function() {
                 photoPreview.innerHTML = "";
 
                 const previewImage = document.createElement("img");
-
                 previewImage.src = photoData;
 
                 photoPreview.appendChild(previewImage);
-
             };
 
             image.src = event.target.result;
-
         };
 
         reader.readAsDataURL(file);
-
     });
-
 
     // Génération du CV
 
@@ -599,56 +613,54 @@ document.addEventListener("DOMContentLoaded", function() {
 
         try {
 
+            const languages = [];
+
+            document.querySelectorAll(".language-card").forEach(function(card) {
+
+                const name = card.querySelector(".language-name").value.trim();
+                const level = Number(card.querySelector(".language-range").value);
+
+                if (name) {
+                    languages.push({
+                        name: name,
+                        level: level
+                    });
+                }
+
+            });
+
             const cvData = {
 
                 name: document.getElementById("name").value.trim(),
-
                 job: document.getElementById("job").value.trim(),
-
                 email: document.getElementById("email").value.trim(),
-
                 phone: document.getElementById("phone").value.trim(),
-
                 address: document.getElementById("address").value.trim(),
 
                 profile: document.getElementById("profile").value.trim(),
-
                 education: document.getElementById("education").value.trim(),
-
                 experience: document.getElementById("experience").value.trim(),
-
                 skills: document.getElementById("skills").value.trim(),
 
-                languages: document.getElementById("languages").value.trim(),
+                languages: languages,
 
-                photo: photoData,
+                cvLanguage: document.getElementById("cvLanguage").value,
 
-                // Langue choisie pour le CV final
-                cvLanguage: document.getElementById("cvLanguage").value
+                photo: photoData
 
             };
 
-            // Sauvegarder les informations
-
-            localStorage.setItem(
-                "cvData",
-                JSON.stringify(cvData)
-            );
-
-            // Vérifier la sauvegarde
+            localStorage.setItem("cvData", JSON.stringify(cvData));
 
             if (!localStorage.getItem("cvData")) {
                 throw new Error("Impossible de sauvegarder les données.");
             }
 
-            // Aller vers la page CV
-
             window.location.href = "cv.html";
 
-        } catch (error) {
+        } catch(error) {
 
             alert("Erreur : " + error.message);
-
             console.error(error);
 
         }
