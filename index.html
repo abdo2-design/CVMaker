@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV Maker</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+    <nav>
+        <div class="logo">CV<span>Maker</span></div>
+
+        <ul>
+            <li><a href="#home">Accueil</a></li>
+            <li><a href="#templates">Modèles</a></li>
+            <li><a href="#how">Comment ça marche</a></li>
+        </ul>
+
+        <a href="#templates" class="nav-button">Créer mon CV</a>
+    </nav>
+</header>
+
+<main>
+
+<section id="home" class="hero">
+
+    <div class="hero-text">
+        <p class="small-title">CRÉEZ VOTRE CV EN QUELQUES MINUTES</p>
+
+        <h1>
+            Votre prochain emploi
+            <span>commence ici.</span>
+        </h1>
+
+        <p class="description">
+            Choisissez un modèle professionnel, remplissez vos informations
+            et obtenez un CV élégant et prêt à envoyer.
+        </p>
+
+        <a href="#templates" class="main-button">
+            Créer mon CV →
+        </a>
+    </div>
+
+    <div class="hero-cv">
+        <div class="cv-preview">
+            <div class="cv-photo"></div>
+
+            <h2>Votre Nom</h2>
+            <p>Profession / Domaine</p>
+
+            <hr>
+
+            <div class="cv-lines">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+
+<section id="templates" class="templates">
+
+    <p class="small-title">NOS MODÈLES</p>
+
+    <h2>Choisissez votre modèle</h2>
+
+    <p class="section-description">
+        Des modèles modernes et professionnels pour mettre votre profil en valeur.
+    </p>
+
+    <div class="template-grid">
+
+        <div class="template-card">
+
+            <div class="template-image template-one">
+                <div class="mini-cv">
+                    <div class="mini-sidebar"></div>
+                    <div class="mini-content"></div>
+                </div>
+            </div>
+
+            <h3>Modern</h3>
+            <p>Simple et professionnel</p>
+
+            <button onclick="chooseTemplate('modern')">
+                Utiliser ce modèle
+            </button>
+
+        </div>
+
+
+        <div class="template-card">
+
+            <div class="template-image template-two">
+                <div class="mini-cv">
+                    <div class="mini-header"></div>
+                    <div class="mini-content"></div>
+                </div>
+            </div>
+
+            <h3>Classic</h3>
+            <p>Élégant et classique</p>
+
+            <button onclick="chooseTemplate('classic')">
+                Utiliser ce modèle
+            </button>
+
+        </div>
+
+
+        <div class="template-card">
+
+            <div class="template-image template-three">
+                <div class="mini-cv">
+                    <div class="mini-sidebar"></div>
+                    <div class="mini-content"></div>
+                </div>
+            </div>
+
+            <h3>Creative</h3>
+            <p>Moderne et original</p>
+
+            <button onclick="chooseTemplate('creative')">
+                Utiliser ce modèle
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<section id="how" class="how">
+
+    <p class="small-title">SIMPLE & RAPIDE</p>
+
+    <h2>Comment ça marche ?</h2>
+
+    <div class="steps">
+
+        <div class="step">
+            <div class="number">1</div>
+            <h3>Choisissez</h3>
+            <p>Choisissez le modèle de CV qui vous plaît.</p>
+        </div>
+
+        <div class="step">
+            <div class="number">2</div>
+            <h3>Remplissez</h3>
+            <p>Ajoutez vos informations personnelles et professionnelles.</p>
+        </div>
+
+        <div class="step">
+            <div class="number">3</div>
+            <h3>Téléchargez</h3>
+            <p>Obtenez votre CV prêt à être envoyé.</p>
+        </div>
+
+    </div>
+
+</section>
+
+</main>
+
+
+<footer>
+    <div class="logo">CV<span>Maker</span></div>
+    <p>Créez un CV qui vous ressemble.</p>
+    <p>© 2026 CV Maker</p>
+</footer>
+
+
+<script>
+
+function chooseTemplate(template) {
+
+    localStorage.setItem("selectedTemplate", template);
+
+    window.location.href = "create.html";
+
+}
+
+</script>
+
+</body>
+</html>
